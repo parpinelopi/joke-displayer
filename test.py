@@ -3,6 +3,7 @@ import csv
 from datetime import datetime, timedelta
 from flask import Flask, render_template
 import requests
+import json
 
 
 
@@ -22,9 +23,8 @@ app = Flask (__name__)
 @app.route('/', methods = ['GET'])
 def home():
     request_joke = requests.get('http://api.icndb.com/jokes/random/')
-    print(request_joke.content)
-    joke_data = request_joke.content
-    return render_template('./templates/home.html', data = joke_data)
+    data = json.loads(request_joke.content)
+    return render_template('index.html', data = data['value'])
 
 
 

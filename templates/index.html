@@ -1,7 +1,18 @@
-{% extends 'home.html' %}
+{% extends 'layout.html' %}
 
 {% block content %}
-<table><tr><th>Chuck Norris jokes</th><tr><td>{data}</td></table>
+
+
+<div>
+    {% for datas in data %}
+    <p>
+
+{{data['joke']}}
+    </p>
+
+    {% endfor %}
+
+</div>
 
 
 {% endblock content %}
