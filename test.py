@@ -15,7 +15,7 @@ for item in item_list:
     #jabber.close()
 
 
-#book = xlrd.open_workbook("/Users/pinelopiparaskevopoulou/Desktop/python_docs/sample3.xls")
+#book = xlrd.open_workbook("/Users/pinelopiparaskevopoulou/Desktop/python_docs_temp/sample3.xls")
 #print("The number of worksheets is {0}".format(book.nsheets))
 #print("Worksheet name(s): {0}".format(book.sheet_names()))
 #sh = book.sheet_by_index(0)
@@ -29,7 +29,7 @@ for item in item_list:
 
 # opening the CSV file
 
-with open('/Users/pinelopiparaskevopoulou/Desktop/python_docs/sample3.csv', mode='r')as file:
+with open('/Users/pinelopiparaskevopoulou/Desktop/python_docs_temp/sample3.csv', mode='r')as file:
 
     # reading the CSV file
     csvFile = csv.reader(file)
