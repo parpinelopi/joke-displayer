@@ -1,18 +1,10 @@
 import xlrd
 import csv
+from datetime import datetime, timedelta
+from flask import Flask, render_template
+import requests
 
 
-item_list = ["foccacia", "tea", "cake", "juice"]
-
-for item in item_list:
-    print(item)
-
-#    jabber = open("./Users/pinelopiparaskevopoulou/Desktop/sample.txt", 'r')
-
- #   for line in jabber:
-  #      print(line)
-
-    #jabber.close()
 
 
 #book = xlrd.open_workbook("/Users/pinelopiparaskevopoulou/Desktop/python_docs_temp/sample3.xls")
@@ -25,16 +17,20 @@ for item in item_list:
 #    print(sh.row(rx))
 
 
+app = Flask (__name__)
+
+@app.route('/', methods = ['GET'])
+def home():
+    request_joke = requests.get('http://api.icndb.com/jokes/random/')
+    print(request_joke.content)
+    joke_data = request_joke.content
+    return render_template('./templates/home.html', data = joke_data)
 
 
-# opening the CSV file
 
-with open('/Users/pinelopiparaskevopoulou/Desktop/python_docs_temp/sample3.csv', mode='r')as file:
 
-    # reading the CSV file
-    csvFile = csv.reader(file)
+if __name__ == "__main__":
+    app.run()
 
-    # displaying the contents of the CSV file
-    for lines in csvFile:
-        print(lines)
+
 
