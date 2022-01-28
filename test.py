@@ -1,36 +1,37 @@
+import api
 import xlrd
 import csv
 from datetime import datetime, timedelta
 from flask import Flask, render_template
+from flask_restful import Api, Resource
 import requests
 import json
 
+app = Flask(__name__)
+api = Api(app)
 
 
-
-#book = xlrd.open_workbook("/Users/pinelopiparaskevopoulou/Desktop/python_docs_temp/sample3.xls")
-#print("The number of worksheets is {0}".format(book.nsheets))
-#print("Worksheet name(s): {0}".format(book.sheet_names()))
-#sh = book.sheet_by_index(0)
-#print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
-#print("Cell D30 is {0}".format(sh.cell_value(rowx=5, colx=3)))
-#for rx in range(sh.nrows):
-#    print(sh.row(rx))
-
-
-app = Flask (__name__)
-
-@app.route('/', methods = ['GET'])
+@app.route('/', methods=['GET'])
 def home():
-    request_joke = requests.get('http://api.icndb.com/jokes/random/')
-    data = json.loads(request_joke.content)
-    return render_template('index.html', data = data['value'])
+    joke_list = []
+    for i in range(10):
+        request_joke = requests.get('http://api.icndb.com/jokes/random/')
+        data_item = json.loads(request_joke.content)
+        joke_list.append(data_item)
+
+    string_list = []
+    for i in range(10):
+        string_list.append(joke_list[i]['value']['joke'])
 
 
+    return render_template('index.html', data=string_list)
 
+
+class Jokes(Resource):
+    pass
+
+
+api.add_resource(Jokes, '/http://localhost:5000/getJokes')
 
 if __name__ == "__main__":
     app.run()
-
-
-
