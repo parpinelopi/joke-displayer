@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<div>
+    {% for joke in data %}
+
+    <p>{{joke}}</p>
+
+    {% endfor %}
+
+</div>
+
+
+{% endblock content %}
